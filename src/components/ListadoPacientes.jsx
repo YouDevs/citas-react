@@ -11,33 +11,10 @@ const ListadoPacientes = ({pacientes}) => {
 					<span className="text-indigo-600 font-bold">Pacientes y Citas</span>
 			</p>
 
-			<div className="m-3 bg-white shadow-md px-5 py-10 rounded">
-				<p className="font-bold mb-3 text-gray-700 uppercase">
-					Propietario: {""}
-					<span className="font-normal normal-case">Carlos</span>
-				</p>
-				<p className="font-bold mb-3 text-gray-700 uppercase">
-					Email: {""}
-					<span className="font-normal normal-case">
-						carlos_develops@outlook.com
-					</span>
-				</p>
-				<p className="font-bold mb-3 text-gray-700 uppercase">
-					Alta: {""}
-					<span className="font-normal normal-case">10 Diciembre 2023</span>
-				</p>
-				<p className="font-bold mb-3 text-gray-700 uppercase">
-					Sintomas: {""}
-					<span className="font-normal normal-case">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-					</span>
-				</p>
-			</div>
-
 			{
-				pacientes.map( (paciente, index) => (
+				pacientes.map( paciente => (
 						<Paciente
-							key={index}
+							key={paciente.id}
 							paciente={paciente}
 						/>
 					)
