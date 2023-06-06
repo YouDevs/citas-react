@@ -1,24 +1,32 @@
-const Paciente = () => {
+/* eslint-disable react/prop-types */
+const Paciente = ({paciente}) => {
+
+    const {nombre, propietario, email, fecha, sintomas} = paciente
+
   return (
     <div className="mx-5 my-10 bg-white shadow-md px-5 py-10 rounded">
         <p className="font-bold mb-3 text-gray-700 uppercase">
+            Mascota: {""}
+            <span className="font-normal normal-case">{nombre}</span>
+        </p>
+        <p className="font-bold mb-3 text-gray-700 uppercase">
             Propietario: {""}
-            <span className="font-normal normal-case">Carlos</span>
+            <span className="font-normal normal-case">{propietario}</span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
             Email: {""}
             <span className="font-normal normal-case">
-                carlos_develops@outlook.com
+                {email}
             </span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
             Alta: {""}
-            <span className="font-normal normal-case">10 Diciembre 2023</span>
+            <span className="font-normal normal-case">{fecha}</span>
         </p>
         <p className="font-bold mb-3 text-gray-700 uppercase">
             Sintomas: {""}
             <span className="font-normal normal-case">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                {sintomas}
             </span>
         </p>
     </div>

@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import Paciente from "./Paciente";
 
-const ListadoPacientes = () => {
+const ListadoPacientes = ({pacientes}) => {
 
 	return (
 		<div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -33,11 +34,15 @@ const ListadoPacientes = () => {
 				</p>
 			</div>
 
-			<Paciente />
-			<Paciente />
-			<Paciente />
-			<Paciente />
-			<Paciente />
+			{
+				pacientes.map( (paciente, index) => (
+						<Paciente
+							key={index}
+							paciente={paciente}
+						/>
+					)
+				)
+			}
 		</div>
 	);
 };
