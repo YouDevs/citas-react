@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import {useState, useEffect} from 'react'
 import Error from './Error'
 
-const Formulario = ({pacientes, setPacientes}) => {
+const Formulario = ({pacientes, setPacientes, paciente}) => {
 
 	const [nombre, setNombre] = useState('')
 	const [propietario, setPropietario] = useState('')
@@ -10,6 +11,18 @@ const Formulario = ({pacientes, setPacientes}) => {
 	const [fecha, setFecha] = useState('')
 	const [sintomas, setSintomas] = useState('')
 	const [error, setError] = useState(false)
+
+	// En este caso useEffect se ejecuta cuando estado: paciente cambie.
+	useEffect(() => {
+		console.log(paciente)
+
+	}, [paciente])
+
+	// Este useEfecct se ejecutaría solo se va a ejecutar una vez cuando el componente esté listo:
+	// useEffect(() => {
+	// 	console.log("El componente está Listo")
+
+	// }, [])
 
 	const generarId = () => {
 		const random = Math.random().toString(36).substr(2)
