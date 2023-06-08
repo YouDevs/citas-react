@@ -2,8 +2,9 @@
 /* eslint-disable no-unused-vars */
 import {useState, useEffect} from 'react'
 import Error from './Error'
+import Paciente from './Paciente';
 
-const Formulario = ({pacientes, setPacientes, paciente}) => {
+const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
 
 	const [nombre, setNombre] = useState('')
 	const [propietario, setPropietario] = useState('')
@@ -14,7 +15,15 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 
 	// En este caso useEffect se ejecuta cuando estado: paciente cambie.
 	useEffect(() => {
-		console.log(paciente)
+		// valida que el objeto paciente tenga algo:
+		if( Object.keys(paciente).length > 0 ) {
+			// Setea los estados de los inputs de formulario:
+			setNombre(paciente.nombre)
+			setPropietario(paciente.propietario)
+			setEmail(paciente.email)
+			setFecha(paciente.fecha)
+			setSintomas(paciente.sintomas)
+		}
 
 	}, [paciente])
 
@@ -49,12 +58,30 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 			propietario,
 			email,
 			fecha,
-			sintomas,
-			id: generarId()
+			sintomas
 		}
 
-		// console.log(objetoPaciente)
-		setPacientes([...pacientes, objetoPaciente])
+		// Si existe paciente.id quiere decir que estamos editando:
+		if(paciente.id) {
+			// Editando paciente
+			// Asignamos el id que ya vive en el objeto paciente:
+			objetoPaciente.id = paciente.id
+
+			console.log(objetoPaciente)
+			// Itera sobre todos los pacientes del state
+			// Si encuentra al paciente que se actualizará lo retorna con los cambios
+			// Mientras no se encuentre retornará a los pacientes en su estado actual.
+			const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState )
+
+			setPacientes(pacientesActualizados)
+			setPaciente({})
+		} else {
+			// Nuevo paciente
+			// Asignamos un id al nuevo paciente:
+			objetoPaciente.id = generarId()
+			setPacientes([...pacientes, objetoPaciente])
+		}
+
 
 		// Reiniciar el formulario:
 		setNombre('')
@@ -63,7 +90,7 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 		setFecha('')
 		setSintomas('')
 
-		console.log("enviando formulario...")
+		console.log("Formulario Enviado")
 	}
 
 	return (
@@ -167,7 +194,7 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 				<input
 					type="submit"
 					className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
-					value="Agregar paciente"
+					value={paciente.id ? 'Editar Paciente': 'Agregar paciente'}
 				/>
 
 			</form>
