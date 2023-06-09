@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Paciente from "./Paciente"
 
-const ListadoPacientes = ({pacientes, setPaciente}) => {
+const ListadoPacientes = ({pacientes, setPaciente, eliminarPaciente}) => {
 
 	// console.log(pacientes.length === 0)
 	// console.log(pacientes && pacientes.length)
@@ -25,6 +25,7 @@ const ListadoPacientes = ({pacientes, setPaciente}) => {
 									key={paciente.id}
 									paciente={paciente}
 									setPaciente={setPaciente}
+									eliminarPaciente={eliminarPaciente}
 								/>
 							)
 						)
